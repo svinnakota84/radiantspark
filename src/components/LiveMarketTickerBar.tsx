@@ -17,16 +17,16 @@ export interface MarketItem {
 }
 
 const INITIAL_MARKET_DATA: MarketItem[] = [
-  { symbol: 'RDNT.US', name: 'Radiant Spark LLC', price: '$84.50', change: '+3.85%', isUp: true, volume: '1.42M', category: 'stock' },
-  { symbol: 'SPARKLE.IN', name: 'RDNT Sparkle Drinks', price: '₹420.50', change: '+5.12%', isUp: true, volume: '850K cs', category: 'stock' },
-  { symbol: 'OIC-ERP.CLOUD', name: 'Oracle OIC Hub', price: '99.98%', change: '-0.02%', isUp: true, volume: '1.1s Lat', category: 'ai_metric' },
-  { symbol: 'SPARKDEALS.IDX', name: 'Live Price Drop Index', price: '142 Deals', change: '+34% Avg', isUp: true, volume: '12K Views', category: 'ai_metric' },
-  { symbol: 'ALUMINUM.FUT', name: 'Beverage Can Futures', price: '$2,640/MT', change: '+1.15%', isUp: true, volume: '45K T', category: 'commodity' },
-  { symbol: 'HERBAL.EXTRACT', name: 'Botanical Root Stock', price: '$14.20/KG', change: '-0.40%', isUp: false, volume: '12K KG', category: 'commodity' },
-  { symbol: 'USD/INR', name: 'Forex Spot Rate', price: '₹84.32', change: '-0.12%', isUp: false, volume: '$4.2B', category: 'currency' },
-  { symbol: 'EV-REEFER.EFF', name: 'Tata Ace Fleet Efficiency', price: '3.2 kWh', change: '+0.80%', isUp: true, volume: '2.8°C', category: 'ai_metric' },
-  { symbol: 'BTC/USD', name: 'Bitcoin Spot', price: '$94,850', change: '+4.20%', isUp: true, volume: '$38B', category: 'currency' },
-  { symbol: 'S&P 500', name: 'US Tech Index', price: '5,920.40', change: '+0.75%', isUp: true, volume: '$120B', category: 'stock' },
+  { symbol: 'ORCL', name: 'Oracle Corp (Enterprise Systems & OIC)', price: '$188.40', change: '+2.15%', isUp: true, volume: '8.4M', category: 'stock' },
+  { symbol: 'NVDA', name: 'NVIDIA Corp (AI Computing)', price: '$148.20', change: '+3.40%', isUp: true, volume: '42.1M', category: 'stock' },
+  { symbol: 'AMZN', name: 'Amazon.com (AWS Cloud & Logistics)', price: '$208.60', change: '+2.20%', isUp: true, volume: '28.5M', category: 'stock' },
+  { symbol: 'AAPL', name: 'Apple Inc (Mobile & Watch Ecosystem)', price: '$242.80', change: '+1.10%', isUp: true, volume: '32.4M', category: 'stock' },
+  { symbol: 'S&P 500', name: 'US Benchmark Index', price: '5,920.40', change: '+0.75%', isUp: true, volume: '$120B', category: 'stock' },
+  { symbol: 'NIFTY 50', name: 'NSE India Benchmark', price: '24,350.20', change: '+0.85%', isUp: true, volume: '₹45K Cr', category: 'stock' },
+  { symbol: 'ALUMINUM', name: 'LME Beverage Can Futures', price: '$2,640.50/MT', change: '+1.12%', isUp: true, volume: '45K T', category: 'commodity' },
+  { symbol: 'SUGAR NO.11', name: 'Bottling Raw Material', price: '$21.80/lb', change: '-0.45%', isUp: false, volume: '18K Lots', category: 'commodity' },
+  { symbol: 'USD/INR', name: 'Forex Spot Rate', price: '₹84.32', change: '-0.08%', isUp: false, volume: '$4.2B', category: 'currency' },
+  { symbol: 'BTC/USD', name: 'Bitcoin Spot', price: '$94,850', change: '+3.20%', isUp: true, volume: '$38B', category: 'currency' },
 ];
 
 export const LiveMarketTickerBar: React.FC = () => {

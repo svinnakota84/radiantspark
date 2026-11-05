@@ -279,21 +279,6 @@ export const Header: React.FC<HeaderProps> = ({
                 हिंदी
               </button>
             </div>
-            {/* Direct Download GitHub ZIP Button */}
-            <button
-              type="button"
-              onClick={async () => {
-                const { downloadZipFile } = await import('../utils/downloadZip');
-                downloadZipFile('radiantspark-final.zip');
-              }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-300 bg-emerald-950/70 hover:bg-emerald-900/80 border border-emerald-500/50 shadow-md shadow-emerald-950/50 transition-all hover:scale-[1.03] active:scale-[0.98]"
-              title="Download single ZIP for GitHub"
-            >
-              <span className="text-sm">📦</span>
-              <span className="hidden md:inline">Download ZIP</span>
-              <span className="md:hidden">ZIP</span>
-            </button>
-
             {/* Prominent Download Mobile Apps Button */}
             <button
               type="button"
