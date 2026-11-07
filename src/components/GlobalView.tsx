@@ -143,22 +143,22 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/80 text-blue-300 border border-blue-500/40 text-xs font-mono font-bold mb-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>WEBULL &amp; LIVETRADES MARKET ARCHITECTURE</span>
+              <span>EXTERNAL MARKET RESEARCH</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Real-Time Financial Markets &amp; Live Order Depth
+              Markets &amp; event research
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
-              Live streaming ticker feeds, candlestick chart telemetry, order book depth ladder, and instant execution simulation inspired by Webull and LiveTrades.
+              Provider connections are not active. Visit external providers for their own market information and eligibility terms.
             </p>
           </div>
 
           <div className="flex items-center gap-2 font-mono text-xs">
             <span className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400">
-              ⚡ 20ms WebSocket Latency
+              No market stream connected
             </span>
             <span className="px-3 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-bold">
-              Level 2 Depth Active
+              No order execution
             </span>
           </div>
         </div>
@@ -231,7 +231,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
                 RDNT Sparkle Industries LLP
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Operating across Andhra Pradesh and pan-India. Manufacturing and syndicating clean energy hardware, botanical beverages, gourmet dry fruits, and the automated SparkDeal Hub.
+                Business concepts across clean energy, beverages, natural foods, distribution and merchant discovery. Current licenses, registrations and operating capacity require verification.
               </p>
               <div className="space-y-2 pt-2">
                 <div className="text-xs font-semibold text-slate-400 font-mono uppercase">Key Divisions:</div>
@@ -304,7 +304,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
                 </div>
                 <h3 className="text-lg font-bold text-white">SparkSync Mobile OS</h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Apple Watch live telemetry, 3D rotating Biometric Plexus (75 bpm cardiac pulse), smart duplicate photo cleaner, and binary prediction options.
+                  Business task planning for ten roles. No health telemetry, trading, betting or device-cleaning service is connected.
                 </p>
               </div>
 
@@ -335,7 +335,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
                 </div>
                 <h3 className="text-lg font-bold text-white">SparkDeals Hub App</h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Real-time verified bargains from Amazon US, Amazon India, Walmart, and SHEIN. Direct merchant deep-links and verified discount coupons.
+                  Browse merchant websites for current offers. No live price feed, stock verification or discount-code verification is connected.
                 </p>
               </div>
 
