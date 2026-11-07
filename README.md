@@ -8,6 +8,7 @@ Node 24: `npm ci`, `npm run lint`, `npm run build`. Publish **dist**, never the 
 
 ## Verified behavior and limits
 
+- WebGL initialization failures fall back to a CSS glow instead of crashing React.
 - A single React entrypoint replaces the previous competing static/React applications.
 - Relative assets work under `/radiantspark/` and a future custom domain.
 - No browser Gemini secret injection. No false success for Oracle dispatch.

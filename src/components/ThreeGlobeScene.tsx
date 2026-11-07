@@ -55,11 +55,17 @@ export const ThreeGlobeScene: React.FC<ThreeGlobeSceneProps> = ({
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1200);
     camera.position.set(0, 0, 320);
 
-    const renderer = new THREE.WebGLRenderer({
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: !isSoftwareGl,
       powerPreference: 'high-performance',
-    });
+      });
+    } catch {
+      container.style.background = 'radial-gradient(ellipse at center, rgba(37,99,235,.25), transparent 65%)';
+      return;
+    }
     renderer.setPixelRatio(isSoftwareGl ? 1 : Math.min(window.devicePixelRatio, 2));
     renderer.setSize(width, height);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
