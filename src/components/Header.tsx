@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-slate-700/80 flex items-center justify-center p-1.5 shadow-md group-hover:border-blue-500/50 transition-colors">
               <img
-                src="/assets/icon.svg"
+                src="./assets/icon.svg"
                 alt="Radiant Spark Symbol"
                 className="w-full h-full object-contain"
               />

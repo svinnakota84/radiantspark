@@ -18,7 +18,7 @@ export const INDIA_DIVISIONS: DivisionInfo[] = [
       'LiFePO4 Storage Systems & Backup Integration',
       'Regional Clean Energy Transition Roadmaps'
     ],
-    image: '/assets/spark-ev.jpg',
+    image: './assets/spark-ev.jpg',
     linkText: 'Explore Spark EV Initiatives'
   },
   {
@@ -26,14 +26,14 @@ export const INDIA_DIVISIONS: DivisionInfo[] = [
     name: 'Sparkle Drinks',
     tagline: 'Contemporary Refreshment & Botanical Beverages',
     category: 'Beverages',
-    description: 'Beverage product formulation, contract manufacturing partnerships, wholesale supply distribution, and market expansion adhering to FSSAI standards and sustainable packaging.',
+    description: 'Beverage product formulation, contract manufacturing partnerships, wholesale supply distribution, and market expansion subject to applicable food-safety approvals and sustainable packaging.',
     features: [
       'Zero Refined Sugar Botanical Spritzes & Hydration',
-      'FSSAI & BIS Certified Manufacturing Standards',
+      'Licensing and applicable product standards require verification',
       'B2B Wholesale & Modern Trade Distribution',
       'Eco-Friendly Recyclable Aluminum Can Packaging'
     ],
-    image: '/assets/sparkle-drinks.jpg',
+    image: './assets/sparkle-drinks.jpg',
     linkText: 'Discover Sparkle Drinks'
   },
   {
@@ -48,7 +48,7 @@ export const INDIA_DIVISIONS: DivisionInfo[] = [
       'Zero Palm Oil, Cold-Pressed Roasting Technique',
       'Multi-Tier Vacuum Sealed Freshness Packaging'
     ],
-    image: '/assets/spicy-sparkle-naturals.jpg',
+    image: './assets/spicy-sparkle-naturals.jpg',
     linkText: 'Browse Naturals Range'
   },
   {
@@ -63,7 +63,7 @@ export const INDIA_DIVISIONS: DivisionInfo[] = [
       'Smart Route Optimization & GPS Fleet Telematics',
       'Pilot Solar Charging Depot Integration'
     ],
-    image: '/assets/sparkle-distribution.jpg',
+    image: './assets/sparkle-distribution.jpg',
     linkText: 'Learn About Distribution'
   }
 ];

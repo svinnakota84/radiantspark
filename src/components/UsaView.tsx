@@ -111,7 +111,7 @@ export const UsaView: React.FC<UsaViewProps> = ({ onOpenSparkSync, onSwitchToInd
             <div className="lg:col-span-5">
               <div className="relative h-72 sm:h-88 rounded-2xl overflow-hidden border border-cyan-500/30 shadow-2xl bg-slate-950 group">
                 <img
-                  src="/assets/spark-it.jpg"
+                  src="./assets/spark-it.jpg"
                   alt="Spark IT Consulting technology and Oracle Cloud services"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {

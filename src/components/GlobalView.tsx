@@ -268,7 +268,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
                 Standalone Mobile Web Apps &amp; PWA Downloads
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Direct mobile-optimized interfaces for your iPhone, iPad, Android, or Desktop. Install directly to your device home screen without app store wait times.
+                Direct mobile-optimized interfaces for your iPhone, iPad, Android, or Desktop. Open the responsive website; native app packages are not published.
               </p>
             </div>
 
@@ -278,19 +278,16 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
                 className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-emerald-500/20 flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
               >
                 <span>📲</span>
-                <span>Download App Hub</span>
+                <span>Website access</span>
               </button>
 
               <button
                 type="button"
-                onClick={async () => {
-                  const { downloadZipFile } = await import('../utils/downloadZip');
-                  downloadZipFile('radiantspark-final.zip');
-                }}
+                onClick={onOpenDownloadApp}
                 className="px-5 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-emerald-300 font-bold text-xs sm:text-sm border border-emerald-500/40 flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
               >
                 <span>📦</span>
-                <span>Download ZIP</span>
+                <span>Website access</span>
               </button>
             </div>
           </div>
@@ -313,7 +310,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
 
               <div className="pt-2 flex items-center gap-3">
                 <a
-                  href="/app.html"
+                  href="./index.html#brain"
                   className="flex-1 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs text-center shadow-md transition-all active:scale-95"
                 >
                   Launch SparkSync App ↗
@@ -344,13 +341,13 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
 
               <div className="pt-2 flex items-center gap-3">
                 <a
-                  href="/app.html#deals"
+                  href="./sparkdeals.html"
                   className="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs text-center shadow-md transition-all active:scale-95"
                 >
                   Launch SparkDeals ↗
                 </a>
                 <a
-                  href="/sparkdeals.html"
+                  href="./sparkdeals.html"
                   className="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 font-semibold text-xs border border-slate-700"
                 >
                   Web Portal ↗

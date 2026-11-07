@@ -129,6 +129,7 @@ export default function App() {
 
       {/* Real-Time Live Market Ticker Tape (Webull & LiveTrades Style) */}
       <LiveMarketTickerBar />
+      <p className="px-6 py-3 text-center bg-amber-950 text-amber-100 text-sm">Business preview · Company registrations and operating licenses require verification · No live trading, betting, merchant feed or automated fulfillment is connected.</p>
 
       {/* Main Content with Animated View Transition */}
       <main className="flex-1 relative z-10">
@@ -162,7 +163,7 @@ export default function App() {
               <IndiaView
                 deals={deals}
                 onVoteDeal={handleVoteDeal}
-                onSelectDealModal={(deal) => setSelectedDeal(deal)}
+                onSelectDealModal={(deal: DealItem) => setSelectedDeal(deal)}
                 onOpenSparkSync={() => setIsSparkSyncOpen(true)}
                 onOpenTakedownModal={() => setIsTakedownOpen(true)}
                 onSwitchToUsa={() => handleNavigateView('usa')}
@@ -196,7 +197,7 @@ export default function App() {
               <SparkDealsView
                 deals={deals}
                 onVoteDeal={handleVoteDeal}
-                onSelectDealModal={(deal) => setSelectedDeal(deal)}
+                onSelectDealModal={(deal: DealItem) => setSelectedDeal(deal)}
                 onOpenLegalShield={handleOpenLegalShieldSection}
               />
             </motion.div>

@@ -48,7 +48,7 @@ export const IndiaView: React.FC<IndiaViewProps> = ({
   const FAQS = [
     {
       q: 'Which company operates the India divisions and SparkDeal Hub?',
-      a: 'Spark EV, Sparkle Drinks, Spicy Sparkle Naturals, Sparkle Distribution Network, and the SparkDeal Hub are operated under RDNT Sparkle Industries LLP, a registered Limited Liability Partnership in Andhra Pradesh, India.'
+      a: 'Spark EV, Sparkle Drinks, Spicy Sparkle Naturals, Sparkle Distribution Network, and the SparkDeal Hub are operated under RDNT Sparkle Industries LLP, as described by the site owner; statutory registrations and current operating permissions have not been verified.'
     },
     {
       q: 'What does Spark EV focus on in Andhra Pradesh?',
@@ -56,7 +56,7 @@ export const IndiaView: React.FC<IndiaViewProps> = ({
     },
     {
       q: 'How does the SparkDeal Hub affiliate model protect consumers and comply with Indian law?',
-      a: 'SparkDeal Hub acts strictly as an Intermediary under Section 79 of the Information Technology Act, 2000 and adheres to the Consumer Protection (E-Commerce) Rules, 2020. Products are purchased directly from verified merchants (Amazon India, Flipkart, Tata Neu) with zero price inflation. RDNT Sparkle Industries LLP receives standard merchant-funded affiliate referral fees.'
+      a: 'SparkDeal Hub links to external merchants. Check the seller, price, shipping and return terms before purchase. Affiliate commissions may apply where an approved relationship exists. No immunity or blanket compliance is promised.'
     },
     {
       q: 'Where is Spark IT Consulting hosted?',
@@ -127,7 +127,7 @@ export const IndiaView: React.FC<IndiaViewProps> = ({
             <div className="lg:col-span-5">
               <div className="relative h-72 sm:h-88 rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl bg-slate-950 group">
                 <img
-                  src="/assets/spark-ev.jpg"
+                  src="./assets/spark-ev.jpg"
                   alt="Spark EV concept: electric mobility and charging station"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
