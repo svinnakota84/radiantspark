@@ -1,6 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import {ArrowUpRight, LockKeyhole, Send, LoaderCircle, PlugZap} from 'lucide-react';
 import {AGENTS} from '../../shared/agents.mjs';
+import './agent-workspace.css';
 
 const API = import.meta.env.VITE_AGENT_API_URL || '/api/agents';
 export const AgentWorkspace = () => {

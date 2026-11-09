@@ -1,6 +1,6 @@
 # Radiant Spark Global
 
-A responsive customer-facing website for technology services, India business inquiries, retailer discovery, Lifestyle Hub and a ten-role Composio workspace.
+Preserves the earlier Radiant Spark visual design and navigation, with corrected functionality. A responsive customer-facing website for technology services, India business inquiries, retailer discovery, Lifestyle Hub and a ten-role Composio workspace.
 
 ## Build
 Node 24: `npm ci`, `npm test`, `npm run lint`, `npm run build`. GitHub Actions publishes only `dist`. No source archives or database schemas are public build assets.
