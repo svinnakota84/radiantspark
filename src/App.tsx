@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 import { CountryView, DealItem } from './types';
 import { LanguageCode } from './utils/translations';
 import { INITIAL_DEALS } from './data/dealsData';
+import { loadDealsFeed } from './utils/dealsFeed';
+import { DemoBanner } from './components/DemoBanner';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { GlobalView } from './components/GlobalView';
@@ -21,28 +23,40 @@ import { CinematicOrb3D } from './components/CinematicOrb3D';
 import { SparkDealsView } from './components/SparkDealsView';
 import { AiBrainView } from './components/AiBrainView';
 import { LiveMarketTickerBar } from './components/LiveMarketTickerBar';
+import { LifestylePortal } from './components/LifestylePortal';
+import { StripeSubscriptionModal } from './components/StripeSubscriptionModal';
 import { Zap, HelpCircle, ShieldCheck, Check, Smartphone } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<CountryView>(() => {
     const hash = window.location.hash.replace('#', '');
-    if (hash === 'india' || hash === 'usa' || hash === 'sparkdeals' || hash === 'brain') return hash as CountryView;
+    if (hash === 'india' || hash === 'usa' || hash === 'sparkdeals' || hash === 'brain' || hash === 'lifestyle') return hash as CountryView;
     return 'global';
   });
   const [currentLang, setCurrentLang] = useState<LanguageCode>('en');
   const [deals, setDeals] = useState<DealItem[]>(INITIAL_DEALS);
+  const [isLiveFeed, setIsLiveFeed] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState<DealItem | null>(null);
   const [isSparkSyncOpen, setIsSparkSyncOpen] = useState(false);
   const [isDownloadAppOpen, setIsDownloadAppOpen] = useState(false);
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const [isTakedownOpen, setIsTakedownOpen] = useState(false);
+  const [isStripeModalOpen, setIsStripeModalOpen] = useState(false);
+  const [stripePlanName, setStripePlanName] = useState('Pro Lifestyle Subscription');
+  const [stripePriceUsd, setStripePriceUsd] = useState(29);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    loadDealsFeed().then((feed) => {
+      if (feed) { setDeals(feed); setIsLiveFeed(true); }
+    });
+  }, []);
 
   React.useEffect(() => {
     const onHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash === 'india' || hash === 'usa' || hash === 'sparkdeals' || hash === 'brain' || hash === 'global') {
+      if (hash === 'india' || hash === 'usa' || hash === 'sparkdeals' || hash === 'brain' || hash === 'lifestyle' || hash === 'global') {
         setCurrentView(hash as CountryView);
       }
     };
@@ -55,28 +69,6 @@ export default function App() {
     setTimeout(() => {
       setToastMessage(null);
     }, 3000);
-  };
-
-  const handleVoteDeal = (dealId: string) => {
-    setDeals((prev) =>
-      prev.map((d) => {
-        if (d.id === dealId) {
-          const isUpvoted = !d.upvoted;
-          const newScore = isUpvoted ? d.score + 1 : d.score - 1;
-          showToast(isUpvoted ? `🔥 Upvoted! Community score: ${newScore}` : 'Vote removed');
-          return {
-            ...d,
-            upvoted: isUpvoted,
-            score: newScore,
-          };
-        }
-        return d;
-      })
-    );
-  };
-
-  const handleRefreshDealsFromSync = () => {
-    showToast('⚡ SparkSync: Indian deal feeds refreshed & verified.');
   };
 
   const handleNavigateView = (view: CountryView) => {
@@ -129,7 +121,6 @@ export default function App() {
 
       {/* Real-Time Live Market Ticker Tape (Webull & LiveTrades Style) */}
       <LiveMarketTickerBar />
-      <p className="px-6 py-3 text-center bg-amber-950 text-amber-100 text-sm">Business preview · Company registrations and operating licenses require verification · No live trading, betting, merchant feed or automated fulfillment is connected.</p>
 
       {/* Main Content with Animated View Transition */}
       <main className="flex-1 relative z-10">
@@ -162,7 +153,6 @@ export default function App() {
             >
               <IndiaView
                 deals={deals}
-                onVoteDeal={handleVoteDeal}
                 onSelectDealModal={(deal: DealItem) => setSelectedDeal(deal)}
                 onOpenSparkSync={() => setIsSparkSyncOpen(true)}
                 onOpenTakedownModal={() => setIsTakedownOpen(true)}
@@ -196,7 +186,7 @@ export default function App() {
             >
               <SparkDealsView
                 deals={deals}
-                onVoteDeal={handleVoteDeal}
+                isLiveFeed={isLiveFeed}
                 onSelectDealModal={(deal: DealItem) => setSelectedDeal(deal)}
                 onOpenLegalShield={handleOpenLegalShieldSection}
               />
@@ -211,9 +201,28 @@ export default function App() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
             >
+              <DemoBanner />
               <AiBrainView
                 onOpenSparkSync={() => setIsSparkSyncOpen(true)}
                 onNavigateToView={handleNavigateView}
+              />
+            </motion.div>
+          )}
+
+          {currentView === 'lifestyle' && (
+            <motion.div
+              key="lifestyle"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+            >
+              <LifestylePortal
+                onOpenStripeModal={(planName, priceUsd) => {
+                  setStripePlanName(planName);
+                  setStripePriceUsd(priceUsd);
+                  setIsStripeModalOpen(true);
+                }}
               />
             </motion.div>
           )}
@@ -275,13 +284,11 @@ export default function App() {
       <SparkSyncModal
         isOpen={isSparkSyncOpen}
         onClose={() => setIsSparkSyncOpen(false)}
-        onRefreshDeals={handleRefreshDealsFromSync}
       />
 
       <DealDetailModal
         deal={selectedDeal}
         onClose={() => setSelectedDeal(null)}
-        onVoteDeal={handleVoteDeal}
         onOpenLegalShield={handleOpenLegalShieldSection}
       />
 
@@ -296,6 +303,13 @@ export default function App() {
       <TakedownModal
         isOpen={isTakedownOpen}
         onClose={() => setIsTakedownOpen(false)}
+      />
+
+      <StripeSubscriptionModal
+        isOpen={isStripeModalOpen}
+        onClose={() => setIsStripeModalOpen(false)}
+        planName={stripePlanName}
+        priceUsd={stripePriceUsd}
       />
     </div>
   );

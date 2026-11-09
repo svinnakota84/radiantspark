@@ -4,12 +4,13 @@
  */
 
 import React from 'react';
+import { ContactLink } from './ContactLink';
 import { ArrowUpRight, Zap, Globe, Shield, Sparkles, Building2, Cpu, ChevronDown, CheckCircle2, TrendingUp } from 'lucide-react';
 import { ThreeGlobeScene } from './ThreeGlobeScene';
 import { RealTimeMarketTerminal } from './RealTimeMarketTerminal';
 
 interface GlobalViewProps {
-  onSwitchView: (view: 'india' | 'usa' | 'sparkdeals') => void;
+  onSwitchView: (view: 'india' | 'usa' | 'sparkdeals' | 'brain' | 'lifestyle') => void;
   onOpenSparkSync: () => void;
   onOpenAssistant: () => void;
   onOpenLegalShield: () => void;
@@ -27,7 +28,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
     <div className="space-y-16 pb-16">
       {/* Hero Section matching image_75289c42.png with 3D Celestial Globe in background */}
       <section className="relative min-h-[580px] sm:min-h-[640px] lg:min-h-[700px] flex items-center justify-center overflow-hidden pt-4 pb-12">
-        
+
         {/* 3D Celestial Wireframe Earth Globe (Centered behind typography) */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
           <ThreeGlobeScene className="w-full h-full max-w-5xl" variant="global" />
@@ -39,7 +40,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
 
         {/* Foreground Content (Centered over 3D Globe as in image_75289c42.png) */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-          
+
           {/* Top Capsule Badge (Exact from image_75289c42.png) */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs text-slate-200 font-medium backdrop-blur-md shadow-lg">
             <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -252,6 +253,41 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
               <ArrowUpRight className="w-4 h-4" />
             </button>
           </div>
+
+          {/* Lifestyle Hub Card (lifestyle.radiantsparkllc.com / svinnakota84/lifestylehub) */}
+          <div className="md:col-span-2 lg:col-span-1 p-8 rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950 border border-emerald-500/30 flex flex-col justify-between space-y-6 shadow-xl relative overflow-hidden group hover:border-emerald-400/60 transition-all">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-500/30">
+                  lifestyle.radiantsparkllc.com
+                </span>
+                <span className="text-2xl">🌿</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+                Lifestyle Hub (AI Health &amp; Diet)
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Explore our lifestyle offering. Personalized coaching, member accounts and automated WhatsApp updates are not connected on this website. Check service availability before subscribing.
+              </p>
+              <div className="space-y-2 pt-2">
+                <div className="text-xs font-semibold text-slate-400 font-mono uppercase">Hub Highlights:</div>
+                <ul className="grid grid-cols-2 gap-2 text-xs text-slate-300">
+                  <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Checkout availability</li>
+                  <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> No health data collected</li>
+                  <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Coaching: not connected</li>
+                  <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Voice: not connected</li>
+                </ul>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onSwitchView('lifestyle')}
+              className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20"
+            >
+              <span>Explore Lifestyle Hub Portal</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </section>
 
@@ -366,52 +402,22 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
           </div>
           <h2 className="text-2xl font-extrabold text-white">Unified Vision, Specialized Operations</h2>
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Radiant Spark Global bridges cutting-edge Silicon Valley enterprise software with industrial physical manufacturing and clean technology in India. Our dual-hub architecture gives our clients and customers the security of U.S. corporate compliance coupled with India's manufacturing dynamism.
+            Radiant Spark Global bridges cutting-edge Silicon Valley enterprise software with industrial physical manufacturing and clean technology in India. The owner presents U.S. technology services and India business divisions here; operating status and registrations require verification.
           </p>
         </div>
       </section>
 
-      {/* Careers Section for #careers in-page link */}
       <section id="careers" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 space-y-4">
-          <div className="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold">
-            Careers &amp; Talent Network
-          </div>
-          <h2 className="text-2xl font-extrabold text-white">Join Our Worldwide Teams</h2>
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            We are continuously seeking world-class talent in Cloud Architecture, Oracle Fusion HCM, Full-Stack TypeScript engineering, Solar PV distribution, and FMCG supply chain operations across Atlanta, GA, and Andhra Pradesh, India.
-          </p>
-          <div className="pt-2">
-            <a
-              href="mailto:careers@radiantsparkllc.com"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-colors"
-            >
-              <span>Contact Talent Desk: careers@radiantsparkllc.com</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
+          <h2 className="text-2xl font-bold text-white">Careers & talent network</h2>
+          <p className="text-slate-300">No verified job openings are listed here. Contact us for current information.</p>
+          <ContactLink />
         </div>
       </section>
-
-      {/* Contact Section for #contact in-page link */}
       <section id="contact" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 space-y-4">
-          <div className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold">
-            Contact Desks
-          </div>
-          <h2 className="text-2xl font-extrabold text-white">Connect with Headquarters</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-300 pt-2">
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
-              <strong className="text-white block font-bold text-sm mb-1">🇺🇸 U.S. Headquarters (Radiant Spark LLC)</strong>
-              <p>Atlanta, GA 30350, United States</p>
-              <p className="mt-1 text-cyan-400 font-mono">contact@radiantsparkllc.com</p>
-            </div>
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
-              <strong className="text-white block font-bold text-sm mb-1">🇮🇳 India Headquarters (RDNT Sparkle Industries LLP)</strong>
-              <p>Andhra Pradesh, India</p>
-              <p className="mt-1 text-amber-400 font-mono">india@radiantsparkllc.com</p>
-            </div>
-          </div>
+          <h2 className="text-2xl font-bold text-white">Contact Radiant Spark</h2>
+          <ContactLink />
         </div>
       </section>
     </div>

@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Internal database schema is not part of the public website.
+/docs/oracle_schema.sql

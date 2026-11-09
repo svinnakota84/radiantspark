@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { CountryView } from '../types';
-import { LanguageCode, TRANSLATIONS } from '../utils/translations';
+import { LanguageCode } from '../utils/translations';
 import { Zap, Menu, X, Globe, Sparkles, ChevronDown } from 'lucide-react';
 
 interface HeaderProps {
@@ -31,7 +31,6 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);
-  const t = TRANSLATIONS[currentLang] || TRANSLATIONS['en'];
 
   const handleNavClick = (view: CountryView) => {
     onSelectView(view);
@@ -60,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto">
         {/* Floating Capsule Dock matching image_75289c42.png */}
         <div className="relative rounded-2xl sm:rounded-3xl bg-[#030712]/80 backdrop-blur-xl border border-slate-800/80 shadow-2xl px-3 sm:px-4 py-2 flex items-center justify-between">
-          
+
           {/* Left Brand Badge */}
           <button
             onClick={() => handleNavClick('global')}
@@ -140,7 +139,19 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <span>🧠</span>
-              <span>AI BRAIN (10 AGENTS)</span>
+              <span>OPERATIONS PLANNER</span>
+            </button>
+
+            <button
+              onClick={() => handleNavClick('lifestyle')}
+              className={`px-3 py-1.5 rounded-full text-[11px] font-extrabold uppercase tracking-wider transition-all flex items-center gap-1 ${
+                currentView === 'lifestyle'
+                  ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                  : 'text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10'
+              }`}
+            >
+              <span>🌿</span>
+              <span>LIFESTYLE &amp; DIET</span>
             </button>
 
             <button
@@ -238,56 +249,17 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </nav>
 
-          {/* Right Action: Language Switcher, Download Apps, ZIP, and Launch SparkSync App Buttons */}
+          {/* Right Action: Language Switcher, Mobile website, ZIP, and Launch SparkSync App Buttons */}
           <div className="flex items-center gap-2">
-            {/* Multi-Language Switcher (English, Telugu, Hindi) */}
-            <div className="flex items-center rounded-xl bg-slate-950 p-1 border border-slate-800 text-[10px] font-mono font-bold shadow-md">
-              <button
-                type="button"
-                onClick={() => onSelectLanguage('en')}
-                className={`px-2 py-1 rounded-lg transition-all ${
-                  currentLang === 'en'
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-                title="English"
-              >
-                EN
-              </button>
-              <button
-                type="button"
-                onClick={() => onSelectLanguage('te')}
-                className={`px-2 py-1 rounded-lg transition-all ${
-                  currentLang === 'te'
-                    ? 'bg-amber-500 text-slate-950 font-black shadow-sm'
-                    : 'text-slate-400 hover:text-amber-300'
-                }`}
-                title="తెలుగు (Telugu)"
-              >
-                తెలుగు
-              </button>
-              <button
-                type="button"
-                onClick={() => onSelectLanguage('hi')}
-                className={`px-2 py-1 rounded-lg transition-all ${
-                  currentLang === 'hi'
-                    ? 'bg-purple-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-purple-300'
-                }`}
-                title="हिंदी (Hindi)"
-              >
-                हिंदी
-              </button>
-            </div>
-            {/* Prominent Download Mobile Apps Button */}
+            {/* Prominent Mobile website Button */}
             <button
               type="button"
               onClick={onOpenDownloadApp}
               className="inline-flex items-center gap-1 px-3 py-1.5 sm:py-2 rounded-xl text-xs font-extrabold text-amber-300 bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 shadow-md shadow-amber-950/50 transition-all hover:scale-[1.02] active:scale-[0.98]"
-              title="Download Mobile Apps (SparkSync OS & SparkDeals Hub)"
+              title="Mobile website (SparkSync OS & SparkDeals Hub)"
             >
               <span>📲</span>
-              <span className="hidden sm:inline">Download Apps</span>
+              <span className="hidden sm:inline">Mobile website</span>
               <span className="sm:hidden">Apps</span>
             </button>
 

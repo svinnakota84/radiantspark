@@ -6,7 +6,7 @@
 import React, { useEffect, useRef } from 'react';
 
 interface CinematicOrb3DProps {
-  variant?: 'global' | 'india' | 'usa' | 'sparkdeals' | 'brain';
+  variant?: 'global' | 'india' | 'usa' | 'sparkdeals' | 'brain' | 'lifestyle';
 }
 
 export const CinematicOrb3D: React.FC<CinematicOrb3DProps> = ({ variant = 'global' }) => {
@@ -29,6 +29,11 @@ export const CinematicOrb3D: React.FC<CinematicOrb3DProps> = ({ variant = 'globa
       global: {
         primary: [37, 99, 235],    // Blue
         secondary: [56, 189, 248],  // Cyan
+        accent: [245, 158, 11],    // Amber
+      },
+      lifestyle: {
+        primary: [16, 185, 129],   // Emerald
+        secondary: [20, 184, 166], // Teal
         accent: [245, 158, 11],    // Amber
       },
       usa: {

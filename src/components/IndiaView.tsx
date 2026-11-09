@@ -1,3 +1,4 @@
+import { ContactLink } from './ContactLink';
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -24,7 +25,6 @@ import {
 
 interface IndiaViewProps {
   deals: DealItem[];
-  onVoteDeal: (dealId: string) => void;
   onSelectDealModal: (deal: DealItem) => void;
   onOpenSparkSync: () => void;
   onOpenTakedownModal: () => void;
@@ -33,7 +33,6 @@ interface IndiaViewProps {
 
 export const IndiaView: React.FC<IndiaViewProps> = ({
   deals,
-  onVoteDeal,
   onSelectDealModal,
   onOpenSparkSync,
   onOpenTakedownModal,
@@ -78,7 +77,7 @@ export const IndiaView: React.FC<IndiaViewProps> = ({
                 <span>🇮🇳</span>
                 <span>India · Andhra Pradesh · Parent Company</span>
                 <span className="text-slate-600">·</span>
-                <span className="text-[11px] text-slate-400 font-mono">Est. July 7, 2026</span>
+                <span className="text-[11px] text-slate-400 font-mono">Owner-described business</span>
               </div>
 
               <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
@@ -158,9 +157,9 @@ export const IndiaView: React.FC<IndiaViewProps> = ({
             <p className="text-xs text-slate-400 mt-1">Guntur commercial hub and regional clean energy distribution corridor.</p>
           </div>
           <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-            <span className="text-4xl font-black text-cyan-400 font-mono block">2026</span>
-            <span className="text-sm font-bold text-slate-200 mt-1 block">LLP Established</span>
-            <p className="text-xs text-slate-400 mt-1">Formed on July 7, 2026 under the Limited Liability Partnership Act of India.</p>
+            <span className="text-4xl font-black text-cyan-400 font-mono block">India</span>
+            <span className="text-sm font-bold text-slate-200 mt-1 block">Registration status</span>
+            <p className="text-xs text-slate-400 mt-1">Registration and operating permissions have not been verified by this website.</p>
           </div>
         </div>
       </section>
@@ -289,12 +288,7 @@ export const IndiaView: React.FC<IndiaViewProps> = ({
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-            <a
-              href="mailto:info@radiantsparkllc.com?subject=RDNT%20Sparkle%20Industries%20LLP%20Inquiry"
-              className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm transition-colors shadow"
-            >
-              Email info@radiantsparkllc.com ↗
-            </a>
+            <ContactLink />
             <button
               onClick={onOpenTakedownModal}
               className="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold"

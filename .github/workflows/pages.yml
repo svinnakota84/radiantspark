@@ -18,9 +18,17 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
       - run: npm run lint
       - run: npm run build
+        env:
+          VITE_STRIPE_LINKS: ${{ vars.VITE_STRIPE_LINKS }}
+          VITE_AMAZON_US_TAG: ${{ vars.VITE_AMAZON_US_TAG }}
+          VITE_AMAZON_IN_TAG: ${{ vars.VITE_AMAZON_IN_TAG }}
+          VITE_DEALS_FEED_URL: ${{ vars.VITE_DEALS_FEED_URL }}
+          VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL }}
+          VITE_FINNHUB_KEY: ${{ secrets.VITE_FINNHUB_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
