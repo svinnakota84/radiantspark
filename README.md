@@ -1,25 +1,21 @@
-# Radiant Spark LLC website
+# Radiant Spark Global
 
-React + Vite site. Build with Node 24: `npm ci`, `npm run lint`, `npm run build`. GitHub Actions deploys `dist` to Pages on `main` (Settings > Pages > Source: GitHub Actions).
+A responsive customer-facing website for technology services, India business inquiries, retailer discovery, Lifestyle Hub and a ten-role Composio workspace.
 
-## What is real and what is a demo
-- **SparkDeals**: product finder. Links go to the store; no prices, discounts or coupons are shown unless a verified feed supplies them with a checked-at time.
-- **Payments**: no card form. Plans open a Stripe Payment Link (`VITE_STRIPE_LINKS`); without one, the site says checkout is not open.
-- **Markets ticker**: real quotes only when `VITE_FINNHUB_KEY` is set; otherwise a "not connected" notice.
-- **Operations planner**: fictional planning roles and browser-local tasks. No AI, ERP, invoicing, WhatsApp or fulfillment service is connected.
+## Build
+Node 24: `npm ci`, `npm test`, `npm run lint`, `npm run build`. GitHub Actions publishes only `dist`. No source archives or database schemas are public build assets.
 
-## Live deals feed
-Host a JSON array at an HTTPS URL and set `VITE_DEALS_FEED_URL`:
-`[{"id":"x1","title":"...","category":"electronics","description":"...","amazonIndiaUrl":"https://...","price":"₹1,799","priceCheckedAt":"2026-11-09T03:00:00Z"}]`
-A price is displayed only with a valid checked-at timestamp from the last 24 hours. The owner must authorize and verify the feed; this site does not independently verify merchant prices. Follow each affiliate program's rules on price freshness.
+## What is live
+The site navigation, retailer search and filtering, product details, division pages and Lifestyle Hub link work without service credentials. No invented price, discount, stock, transaction or agent activity metrics are displayed. The owner contact channel appears only when `VITE_CONTACT_EMAIL` is configured.
 
-## Before going live
-Confirm you own the domain (`public/CNAME` is `radiantsparkllc.com`; delete it if not), set your approved affiliate tags, have a lawyer review the legal pages, and verify tax rates (beverage tax classification needs professional confirmation) and licences with an Indian CA.
+Product-feed settings are public `VITE_AMAZON_US_TAG`, `VITE_AMAZON_IN_TAG` and `VITE_DEALS_FEED_URL`. Without them, curated retailer search links work with no price claims. Approved Amazon tags enable the Associate disclosure. Feed links are restricted to their named retailers; a price requires a valid check timestamp within 24 hours. The website does not independently verify feed prices.
 
-## GitHub Actions configuration
-Set public build settings under Settings > Secrets and variables > Actions > Variables. The workflow reads VITE_STRIPE_LINKS, VITE_AMAZON_US_TAG, VITE_AMAZON_IN_TAG, VITE_DEALS_FEED_URL and VITE_CONTACT_EMAIL. Set VITE_FINNHUB_KEY under Actions Secrets; it is still visible in the compiled browser app. Changes require a new build. Never add a Stripe secret key to a VITE_ variable.
+## Composio agents
+The backend implementation is in `netlify/functions/agents.mjs`. It uses the actual Composio SDK and OpenAI Responses API, with ten role policies and restricted read-only tools. It is **not connected** until the backend host, server credentials and approved app connections are configured. GitHub Pages cannot execute serverless functions. See [setup](docs/COMPOSIO-SETUP.md). No keys are requested in chat or committed.
 
-Lifestyle member access, personalized coaching and WhatsApp delivery remain unavailable. Hosted checkout does not create an authenticated subscription on this static site; fulfillment needs a server-verified webhook and member backend.
+Public build variables are `VITE_AGENT_API_URL`, `VITE_LIFESTYLE_URL`, `VITE_CONTACT_EMAIL`, the Amazon tags and `VITE_DEALS_FEED_URL`. Set these in GitHub Actions Variables for Pages, then rebuild. Backend-only credentials are described in `.env.example` and belong in the serverless host's secret settings.
 
-## Checks
-Run `npm test`, `npm run lint` (TypeScript), and `npm run build`. Product-feed tests cover merchant impersonation, unsafe URLs, duplicates and stale/future prices. The production build excludes internal SQL, archived site copies and obsolete downloadable ZIPs. Browser testing and real service activation are separate from a passing build.
+## Boundaries
+The site does not take orders, execute payments, provide medical or legal services, certify registrations, or run unattended business operations. Business divisions are owner-described inquiry areas; product imagery is illustrative. Actual direct work needs a verified inquiry channel and agreed scope. Customer rights remain in force.
+
+See [archive review](docs/ARCHIVE-REVIEW.md) and `public/business-readiness.html`.

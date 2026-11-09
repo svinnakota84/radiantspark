@@ -1,316 +1,38 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+import React,{useEffect,useState} from 'react';
+import {ArrowUpRight,ArrowRight,Menu,X,Code2,Leaf,ShoppingBag,Sparkles,ChevronDown,Globe2,Layers3} from 'lucide-react';
+import {SparkDealsView} from './components/SparkDealsView';
+import {DealDetailModal} from './components/DealDetailModal';
+import {AgentWorkspace} from './components/AgentWorkspace';
+import {INITIAL_DEALS} from './data/dealsData';
+import {loadDealsFeed} from './utils/dealsFeed';
+import type {DealItem} from './types';
+import './brand.css';
 
-import React, { useState } from 'react';
-import { CountryView, DealItem } from './types';
-import { LanguageCode } from './utils/translations';
-import { INITIAL_DEALS } from './data/dealsData';
-import { loadDealsFeed } from './utils/dealsFeed';
-import { DemoBanner } from './components/DemoBanner';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import { GlobalView } from './components/GlobalView';
-import { IndiaView } from './components/IndiaView';
-import { UsaView } from './components/UsaView';
-import { SparkSyncModal } from './components/SparkSyncModal';
-import { DealDetailModal } from './components/DealDetailModal';
-import { RadiantAssistantModal } from './components/RadiantAssistantModal';
-import { TakedownModal } from './components/TakedownModal';
-import { DownloadAppModal } from './components/DownloadAppModal';
-import { CinematicOrb3D } from './components/CinematicOrb3D';
-import { SparkDealsView } from './components/SparkDealsView';
-import { AiBrainView } from './components/AiBrainView';
-import { LiveMarketTickerBar } from './components/LiveMarketTickerBar';
-import { LifestylePortal } from './components/LifestylePortal';
-import { StripeSubscriptionModal } from './components/StripeSubscriptionModal';
-import { Zap, HelpCircle, ShieldCheck, Check, Smartphone } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-
-export default function App() {
-  const [currentView, setCurrentView] = useState<CountryView>(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash === 'india' || hash === 'usa' || hash === 'sparkdeals' || hash === 'brain' || hash === 'lifestyle') return hash as CountryView;
-    return 'global';
-  });
-  const [currentLang, setCurrentLang] = useState<LanguageCode>('en');
-  const [deals, setDeals] = useState<DealItem[]>(INITIAL_DEALS);
-  const [isLiveFeed, setIsLiveFeed] = useState(false);
-  const [selectedDeal, setSelectedDeal] = useState<DealItem | null>(null);
-  const [isSparkSyncOpen, setIsSparkSyncOpen] = useState(false);
-  const [isDownloadAppOpen, setIsDownloadAppOpen] = useState(false);
-  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
-  const [isTakedownOpen, setIsTakedownOpen] = useState(false);
-  const [isStripeModalOpen, setIsStripeModalOpen] = useState(false);
-  const [stripePlanName, setStripePlanName] = useState('Pro Lifestyle Subscription');
-  const [stripePriceUsd, setStripePriceUsd] = useState(29);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  React.useEffect(() => {
-    loadDealsFeed().then((feed) => {
-      if (feed) { setDeals(feed); setIsLiveFeed(true); }
-    });
-  }, []);
-
-  React.useEffect(() => {
-    const onHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (hash === 'india' || hash === 'usa' || hash === 'sparkdeals' || hash === 'brain' || hash === 'lifestyle' || hash === 'global') {
-        setCurrentView(hash as CountryView);
-      }
-    };
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
-  }, []);
-
-  const showToast = (msg: string) => {
-    setToastMessage(msg);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 3000);
-  };
-
-  const handleNavigateView = (view: CountryView) => {
-    setCurrentView(view);
-    if (view === 'global') {
-      history.pushState(null, '', window.location.pathname);
-    } else {
-      window.location.hash = view;
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleOpenLegalShieldSection = () => {
-    if (currentView !== 'india') {
-      setCurrentView('india');
-      setTimeout(() => {
-        const el = document.getElementById('legal-shield');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    } else {
-      const el = document.getElementById('legal-shield');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-[#030712]/75 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white relative">
-      {/* 3D Cinematic Atmosphere Orb Background (Cross-device normalized) */}
-      {currentView !== 'global' && <CinematicOrb3D variant={currentView} />}
-
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div className="fixed top-20 right-6 z-50 px-4 py-2.5 rounded-xl bg-slate-900 border border-blue-500/50 shadow-2xl text-xs font-semibold text-white flex items-center gap-2 animate-in slide-in-from-top-4 duration-200">
-          <Check className="w-4 h-4 text-emerald-400" />
-          <span>{toastMessage}</span>
-        </div>
-      )}
-
-      {/* Main Header */}
-      <Header
-        currentView={currentView}
-        currentLang={currentLang}
-        onSelectLanguage={setCurrentLang}
-        onSelectView={handleNavigateView}
-        onOpenSparkSync={() => setIsSparkSyncOpen(true)}
-        onOpenAssistant={() => setIsAssistantOpen(true)}
-        onOpenLegalShield={handleOpenLegalShieldSection}
-        onOpenDownloadApp={() => setIsDownloadAppOpen(true)}
-      />
-
-      {/* Real-Time Live Market Ticker Tape (Webull & LiveTrades Style) */}
-      <LiveMarketTickerBar />
-
-      {/* Main Content with Animated View Transition */}
-      <main className="flex-1 relative z-10">
-        <AnimatePresence mode="wait">
-          {currentView === 'global' && (
-            <motion.div
-              key="global"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-            >
-              <GlobalView
-                onSwitchView={handleNavigateView}
-                onOpenSparkSync={() => setIsSparkSyncOpen(true)}
-                onOpenAssistant={() => setIsAssistantOpen(true)}
-                onOpenLegalShield={handleOpenLegalShieldSection}
-                onOpenDownloadApp={() => setIsDownloadAppOpen(true)}
-              />
-            </motion.div>
-          )}
-
-          {currentView === 'india' && (
-            <motion.div
-              key="india"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-            >
-              <IndiaView
-                deals={deals}
-                onSelectDealModal={(deal: DealItem) => setSelectedDeal(deal)}
-                onOpenSparkSync={() => setIsSparkSyncOpen(true)}
-                onOpenTakedownModal={() => setIsTakedownOpen(true)}
-                onSwitchToUsa={() => handleNavigateView('usa')}
-              />
-            </motion.div>
-          )}
-
-          {currentView === 'usa' && (
-            <motion.div
-              key="usa"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-            >
-              <UsaView
-                onOpenSparkSync={() => setIsSparkSyncOpen(true)}
-                onSwitchToIndia={() => handleNavigateView('india')}
-              />
-            </motion.div>
-          )}
-
-          {currentView === 'sparkdeals' && (
-            <motion.div
-              key="sparkdeals"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-            >
-              <SparkDealsView
-                deals={deals}
-                isLiveFeed={isLiveFeed}
-                onSelectDealModal={(deal: DealItem) => setSelectedDeal(deal)}
-                onOpenLegalShield={handleOpenLegalShieldSection}
-              />
-            </motion.div>
-          )}
-
-          {currentView === 'brain' && (
-            <motion.div
-              key="brain"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-            >
-              <DemoBanner />
-              <AiBrainView
-                onOpenSparkSync={() => setIsSparkSyncOpen(true)}
-                onNavigateToView={handleNavigateView}
-              />
-            </motion.div>
-          )}
-
-          {currentView === 'lifestyle' && (
-            <motion.div
-              key="lifestyle"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-            >
-              <LifestylePortal
-                onOpenStripeModal={(planName, priceUsd) => {
-                  setStripePlanName(planName);
-                  setStripePriceUsd(priceUsd);
-                  setIsStripeModalOpen(true);
-                }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
-
-      {/* Footer */}
-      <Footer
-        currentView={currentView}
-        onSelectView={handleNavigateView}
-        onOpenSparkSync={() => setIsSparkSyncOpen(true)}
-        onOpenLegalShield={handleOpenLegalShieldSection}
-        onOpenTakedownModal={() => setIsTakedownOpen(true)}
-      />
-
-      {/* Persistent Floating Controls (Download App, SparkSync & Radiant Intelligence Guide) */}
-      {/* Persistent Floating Controls matching image_ff37cf94.png */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
-        {/* Floating Download Dedicated App Button (image_ff37cf94.png) */}
-        <button
-          onClick={() => setIsDownloadAppOpen(true)}
-          className="group px-4 py-2.5 rounded-full bg-[#1b1409]/90 hover:bg-[#251b0b] text-[#f59e0b] border border-[#f59e0b]/50 font-bold text-xs shadow-xl flex items-center gap-2 hover:scale-105 active:scale-95 transition-all backdrop-blur-md"
-          title="Mobile website access information"
-        >
-          <span>📲</span>
-          <span>Mobile website</span>
-        </button>
-
-        {/* Floating SparkSync App Launcher (image_ff37cf94.png) */}
-        <button
-          onClick={() => setIsSparkSyncOpen(true)}
-          className="group px-4 py-2.5 rounded-full bg-[#0e1e3e]/90 hover:bg-[#132854] text-[#93c5fd] border border-[#3b82f6]/40 font-bold text-xs shadow-xl shadow-blue-500/20 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all backdrop-blur-md"
-          title="Open the local operations planner"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-          </span>
-          <Zap className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
-          <span>Launch SparkSync</span>
-        </button>
-
-        {/* Floating Guide Assistant Button (image_ff37cf94.png) */}
-        <button
-          onClick={() => setIsAssistantOpen(true)}
-          className="px-4 py-2 rounded-full bg-[#0a0f1d]/90 hover:bg-[#10172a] text-slate-300 hover:text-white font-medium text-xs shadow-lg border border-slate-700/80 backdrop-blur-md flex items-center gap-1.5 transition-colors"
-        >
-          <HelpCircle className="w-3.5 h-3.5 text-blue-400" />
-          <span>Ask Radiant Intelligence</span>
-        </button>
-      </div>
-
-      {/* Interactive Modals */}
-      <DownloadAppModal
-        isOpen={isDownloadAppOpen}
-        onClose={() => setIsDownloadAppOpen(false)}
-      />
-
-      <SparkSyncModal
-        isOpen={isSparkSyncOpen}
-        onClose={() => setIsSparkSyncOpen(false)}
-      />
-
-      <DealDetailModal
-        deal={selectedDeal}
-        onClose={() => setSelectedDeal(null)}
-        onOpenLegalShield={handleOpenLegalShieldSection}
-      />
-
-      <RadiantAssistantModal
-        isOpen={isAssistantOpen}
-        onClose={() => setIsAssistantOpen(false)}
-        onNavigateToView={handleNavigateView}
-        onOpenSparkSync={() => setIsSparkSyncOpen(true)}
-        onOpenLegalShield={handleOpenLegalShieldSection}
-      />
-
-      <TakedownModal
-        isOpen={isTakedownOpen}
-        onClose={() => setIsTakedownOpen(false)}
-      />
-
-      <StripeSubscriptionModal
-        isOpen={isStripeModalOpen}
-        onClose={() => setIsStripeModalOpen(false)}
-        planName={stripePlanName}
-        priceUsd={stripePriceUsd}
-      />
-    </div>
-  );
+type View='home'|'technology'|'industry'|'sparkdeals'|'agents'|'lifestyle';
+const viewFromHash=():View=>{const h=location.hash.slice(1);return ({global:'home',usa:'technology',india:'industry',brain:'agents',sparkdeals:'sparkdeals',lifestyle:'lifestyle',technology:'technology',industry:'industry',agents:'agents'} as Record<string,View>)[h]||'home';};
+const lifestyleUrl=import.meta.env.VITE_LIFESTYLE_URL||'https://svinnakota84.github.io/lifestylehub/';
+const contact=import.meta.env.VITE_CONTACT_EMAIL;
+const email=typeof contact==='string'&&/^[^\s@?&#]+@[^\s@?&#]+\.[^\s@?&#]+$/.test(contact)?contact:null;
+const services=[['01','Oracle & enterprise cloud','Connect finance, people and operations through thoughtfully designed enterprise systems.','Oracle Fusion · OIC · Reporting'],['02','Software & integrations','Bring the tools your business uses into a simpler, more connected experience.','Web applications · APIs · Automation'],['03','AI workflow design','Turn a useful idea into a scoped workflow, with clear permissions and human accountability.','Composio · Agent workflows · Controls']];
+const industries=[['spark-ev.jpg','Energy & mobility','Spark EV','Explore clean-energy and mobility business inquiries.'],['sparkle-drinks.jpg','Food & beverage','Sparkle Drinks','Discuss beverage products, sourcing and distribution requirements.'],['spicy-sparkle-naturals.jpg','Everyday essentials','Spicy Sparkle Naturals','Explore natural-food product concepts and supplier inquiries.'],['sparkle-distribution.jpg','Supply chain','Sparkle Distribution','Discuss regional logistics and distribution opportunities.']];
+export default function App(){
+ const[view,setView]=useState<View>(viewFromHash),[menu,setMenu]=useState(false),[deals,setDeals]=useState<DealItem[]>(INITIAL_DEALS),[feed,setFeed]=useState(false),[selected,setSelected]=useState<DealItem|null>(null);
+ useEffect(()=>{const changed=()=>{setView(viewFromHash());setMenu(false);};addEventListener('hashchange',changed);return()=>removeEventListener('hashchange',changed);},[]);
+ useEffect(()=>{loadDealsFeed().then(d=>{if(d){setDeals(d);setFeed(true);}});},[]);
+ const go=(next:View)=>{location.hash=next==='home'?'global':next;setView(next);setMenu(false);window.scrollTo({top:0,behavior:'smooth'});};
+ const inquiry=(label='Discuss your project')=>email?<a className="button primary" href={`mailto:${email}?subject=Radiant%20Spark%20inquiry`}>{label}<ArrowUpRight size={17}/></a>:<a className="button primary" href="#contact" onClick={()=>{if(view!=='home')go('home');setTimeout(()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}),50);}}>{label}<ArrowUpRight size={17}/></a>;
+ return <div className="radiant-site"><a className="skip-link" href="#main">Skip to content</a><header className="site-header"><a href="#global" className="wordmark" onClick={()=>go('home')}><span className="brand-symbol">✳</span><span>radiant spark<span className="brand-sub">TECHNOLOGY. POSSIBILITIES.</span></span></a><nav aria-label="Main navigation" className={menu?'nav-open':''}>{[['home','Overview'],['technology','Technology'],['industry','Industries'],['sparkdeals','SparkDeals'],['lifestyle','Lifestyle'],['agents','Agent workspace']].map(([id,label])=><a key={id} href={`#${id==='home'?'global':id}`} onClick={()=>go(id as View)} aria-current={view===id?'page':undefined}>{label}</a>)}</nav><button className="menu-toggle" aria-label={menu?'Close navigation':'Open navigation'} aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></header>
+ <main id="main">
+ {view==='home'&&<><section className="hero wrap"><div className="hero-copy"><p className="eyebrow"><span className="tiny-star">✳</span> RADIANT SPARK GLOBAL</p><h1>Good ideas.<br/>Real <em>possibilities.</em></h1><p className="hero-description">Technology that connects. Business ideas that move forward. A more considered way to build what’s next.</p><div className="hero-actions"><button className="button primary" onClick={()=>go('technology')}>Explore our capabilities <ArrowUpRight size={18}/></button><button className="text-button" onClick={()=>go('agents')}>Meet the ten agent roles <ArrowRight size={17}/></button></div><div className="hero-foot"><span>U.S. technology services</span><span className="line"/><span>India business divisions</span></div></div><div className="hero-art" role="img" aria-label="Abstract orbital spark illustration"><div className="orbital-glow"/><div className="orbit orbit-one"/><div className="orbit orbit-two"/><div className="orbit orbit-three"/><div className="spark-core">✳</div><span className="orbit-label one"><Code2 size={15}/> Technology</span><span className="orbit-label two"><Leaf size={15}/> Industry</span><span className="orbit-label three"><Sparkles size={15}/> Everyday living</span><p className="art-caption">A connected vision. Built one step at a time.</p></div></section>
+ <div className="capability-strip"><span>Enterprise cloud</span><span>✳</span><span>Connected workflows</span><span>✳</span><span>Everyday discovery</span><span>✳</span><span>Thoughtful technology</span></div>
+ <section className="paper-section"><div className="wrap"><div className="section-heading"><div><p className="eyebrow">A WORLD OF POSSIBILITIES</p><h2>Different disciplines.<br/><em>One practical mindset.</em></h2></div><p>Find the part of Radiant Spark that fits what you’re here to do.</p></div><div className="portal-grid"><button className="portal-card technology-card" onClick={()=>go('technology')}><span className="card-number">01 / BUILD</span><Code2 size={31}/><h3>Technology<br/>with purpose.</h3><p>Enterprise cloud, integrations and software for business.</p><span className="card-link">Explore technology <ArrowUpRight size={20}/></span></button><button className="portal-card industry-card" onClick={()=>go('industry')}><span className="card-number">02 / EXPLORE</span><Leaf size={31}/><h3>Ideas for<br/>everyday industry.</h3><p>Clean energy, products and distribution business inquiries.</p><span className="card-link">Explore industries <ArrowUpRight size={20}/></span></button><button className="portal-card lifestyle-card" onClick={()=>go('lifestyle')}><span className="card-number">03 / LIVE</span><Sparkles size={31}/><h3>A little more<br/>everyday inspiration.</h3><p>Food, movement and personal style at Lifestyle Hub.</p><span className="card-link">Explore lifestyle <ArrowUpRight size={20}/></span></button></div></div></section>
+ <section className="agent-feature wrap"><div><p className="eyebrow">INTRODUCING THE AGENT WORKSPACE</p><h2>A specialist perspective.<br/><em>For every next step.</em></h2><p>Ten distinct assistant roles, from customer support to technology. Built to research and draft through approved Composio app connections.</p><button className="button light" onClick={()=>go('agents')}>Explore the workspace <ArrowUpRight size={18}/></button><small className="feature-note">Roles are software assistants. Live execution requires a connected backend.</small></div><div className="role-mosaic">{['Operations','Customer support','Finance','Technology','Procurement','Growth'].map((r,i)=><div key={r}><span>0{i+1}</span><strong>{r}</strong><ArrowUpRight size={17}/></div>)}<p>10 roles · One owner-controlled workspace</p></div></section>
+ <section className="discovery-section"><div className="wrap discovery-inner"><div><p className="eyebrow">SPARKDEALS PRODUCT FINDER</p><h2>Find your next<br/><em>everyday essential.</em></h2><p>Search a curated selection, choose a retailer, and check the current price directly with the seller.</p><button className="button dark" onClick={()=>go('sparkdeals')}>Browse products <ShoppingBag size={17}/></button></div><div className="discovery-tags"><span>Electronics ↗</span><span>Energy ↗</span><span>Food ↗</span><span>Business essentials ↗</span><p>No invented prices, discounts or stock claims.</p></div></div></section>
+ <section className="contact-section wrap" id="contact"><p className="eyebrow">LET’S START WITH A CONVERSATION</p><h2>What are you<br/><em>working toward?</em></h2>{email?inquiry('Get in touch'):<p className="contact-unavailable">Our public inquiry channel is being configured. Please check back before sending project or personal information.</p>}</section></>}
+ {view==='technology'&&<section className="wrap detail-page"><p className="eyebrow">RADIANT SPARK LLC / TECHNOLOGY</p><h1>Complex systems.<br/><em>A clearer way forward.</em></h1><p className="page-lead">Explore enterprise technology services and discuss a scope tailored to your business.</p><div className="service-list">{services.map(([n,t,d,tags])=><article key={n}><span>{n}</span><div><h2>{t}</h2><p>{d}</p><small>{tags}</small></div><ArrowUpRight/></article>)}</div><div className="process-strip"><h3>From conversation to delivery</h3><p>Understand your needs → Agree a written scope → Build and review → Support the handover.</p></div>{inquiry()}</section>}
+ {view==='industry'&&<section className="wrap detail-page"><p className="eyebrow">INDIA / BUSINESS DIVISIONS</p><h1>Made for the<br/><em>world around us.</em></h1><p className="page-lead">Explore the owner-described business divisions of RDNT Sparkle Industries LLP. Product availability, operating capacity and permissions need confirmation before any order.</p><div className="industry-grid">{industries.map(([img,cat,title,desc])=><article key={title}><img src={`./${img}`} alt={`${title} concept illustration`} loading="lazy"/><div><p className="eyebrow">{cat}</p><h2>{title}</h2><p>{desc}</p></div></article>)}</div><p className="quiet-note">Images illustrate business concepts. No product certification, registration or current stock is asserted by this website.</p>{inquiry('Discuss a business inquiry')}</section>}
+ {view==='sparkdeals'&&<div className="deals-page"><SparkDealsView deals={deals} isLiveFeed={feed} onSelectDealModal={setSelected} onOpenLegalShield={()=>{window.location.href='./business-readiness.html';}}/></div>}
+ {view==='agents'&&<AgentWorkspace/>}
+ {view==='lifestyle'&&<section className="wrap lifestyle-bridge"><div><p className="eyebrow">LIFESTYLE HUB / BY RADIANT SPARK</p><h1>Small rituals.<br/><em>A fuller everyday.</em></h1><p>Explore food inspiration, movement and personal style in our dedicated Lifestyle Hub.</p><a className="button primary" href={lifestyleUrl}>Visit Lifestyle Hub <ArrowUpRight size={18}/></a><p className="quiet-note">Subscription availability and service limits are shown before checkout. No health details are collected on this page.</p></div><div className="lifestyle-art"><span>eat well.</span><span>move often.</span><span>feel yourself.</span><Sparkles size={48}/></div></section>}
+ </main><footer className="site-footer wrap"><div><a className="footer-wordmark" href="#global" onClick={()=>go('home')}>✳ radiant spark</a><p>Technology. Industry. Everyday possibilities.</p></div><div><a href="./business-readiness.html">Customer & privacy information <ArrowUpRight size={14}/></a><p>© {new Date().getFullYear()} Radiant Spark Global</p><small>No unconnected service is represented as live. External retailer terms apply.</small></div></footer><DealDetailModal deal={selected} onClose={()=>setSelected(null)} onOpenLegalShield={()=>location.href='./business-readiness.html'}/></div>;
 }

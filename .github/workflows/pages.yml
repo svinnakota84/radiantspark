@@ -23,7 +23,8 @@ jobs:
       - run: npm run lint
       - run: npm run build
         env:
-          VITE_STRIPE_LINKS: ${{ vars.VITE_STRIPE_LINKS }}
+          VITE_AGENT_API_URL: ${{ vars.VITE_AGENT_API_URL }}
+          VITE_LIFESTYLE_URL: ${{ vars.VITE_LIFESTYLE_URL }}
           VITE_AMAZON_US_TAG: ${{ vars.VITE_AMAZON_US_TAG }}
           VITE_AMAZON_IN_TAG: ${{ vars.VITE_AMAZON_IN_TAG }}
           VITE_DEALS_FEED_URL: ${{ vars.VITE_DEALS_FEED_URL }}
