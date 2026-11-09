@@ -1,21 +1,30 @@
 # Radiant Spark Global
 
-Preserves the earlier Radiant Spark visual design and navigation, with corrected functionality. A responsive customer-facing website for technology services, India business inquiries, retailer discovery, Lifestyle Hub and a ten-role Composio workspace.
+React/Vite corporate site with India divisions, merchant discovery and a local business task planner.
 
 ## Build
-Node 24: `npm ci`, `npm test`, `npm run lint`, `npm run build`. GitHub Actions publishes only `dist`. No source archives or database schemas are public build assets.
 
-## What is live
-The site navigation, retailer search and filtering, product details, division pages and Lifestyle Hub link work without service credentials. No invented price, discount, stock, transaction or agent activity metrics are displayed. The owner contact channel appears only when `VITE_CONTACT_EMAIL` is configured.
+Node 24: `npm ci`, `npm run lint`, `npm run build`. Publish **dist**, never the source index or old ZIP files. GitHub Actions builds and deploys Pages on main; deployment requires repository Pages permission.
 
-Product-feed settings are public `VITE_AMAZON_US_TAG`, `VITE_AMAZON_IN_TAG` and `VITE_DEALS_FEED_URL`. Without them, curated retailer search links work with no price claims. Approved Amazon tags enable the Associate disclosure. Feed links are restricted to their named retailers; a price requires a valid check timestamp within 24 hours. The website does not independently verify feed prices.
+## Verified behavior and limits
 
-## Composio agents
-The backend implementation is in `netlify/functions/agents.mjs`. It uses the actual Composio SDK and OpenAI Responses API, with ten role policies and restricted read-only tools. It is **not connected** until the backend host, server credentials and approved app connections are configured. GitHub Pages cannot execute serverless functions. See [setup](docs/COMPOSIO-SETUP.md). No keys are requested in chat or committed.
+- WebGL initialization failures fall back to a CSS glow instead of crashing React.
+- A single React entrypoint replaces the previous competing static/React applications.
+- Relative assets work under `/radiantspark/` and a future custom domain.
+- No browser Gemini secret injection. No false success for Oracle dispatch.
+- Random market ticks, fictional order books and fixed “live” prices are removed. No brokerage, betting, merchant feed or ERP is connected.
+- SparkDeals is merchant discovery, with no unsupported current price, stock or discount claims.
+- Ten AI roles are a local task planner, not hired employees. Tasks persist on this browser only. No payments, filings, purchase orders or shipments execute.
+- Legal copy preserves consumer rights and does not promise immunity. Division licenses, tax rates and registrations require verification.
 
-Public build variables are `VITE_AGENT_API_URL`, `VITE_LIFESTYLE_URL`, `VITE_CONTACT_EMAIL`, the Amazon tags and `VITE_DEALS_FEED_URL`. Set these in GitHub Actions Variables for Pages, then rebuild. Backend-only credentials are described in `.env.example` and belong in the serverless host's secret settings.
+## Domain / Zoho
 
-## Boundaries
-The site does not take orders, execute payments, provide medical or legal services, certify registrations, or run unattended business operations. Business divisions are owner-described inquiry areas; product imagery is illustrative. Actual direct work needs a verified inquiry channel and agreed scope. Customer rights remain in force.
+`radiantspark.com` redirected to a HugeDomains sale page during the 2026-11-07 audit. Ownership/control has not been established. Do not point an unowned domain or purchase it without authorization. No CNAME is published until ownership and hosting are confirmed.
 
-See [archive review](docs/ARCHIVE-REVIEW.md) and `public/business-readiness.html`.
+Expected default Pages URL once deployment succeeds: https://svinnakota84.github.io/radiantspark/
+
+After ownership is established and the custom domain is configured in GitHub Pages, Zoho DNS for the apex uses four separate A records (`@`): 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153. `www` CNAME: svinnakota84.github.io. Preserve email MX, SPF, DKIM and DMARC records. Wait for DNS and TLS validation before enforcing HTTPS. See https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site.
+
+## Activation requirements
+
+Real markets require authorized provider access and timestamps, stale/error handling and integration tests. Trading/betting also requires provider agreements and jurisdiction review. “Aliena” is unidentified. Live deals require authorized feed credentials and verified offer expiry. Real staff operation requires authenticated accounts, roles, durable records and audit logs. Legal agreements require professional review against actual activities. See public/business-readiness.html.

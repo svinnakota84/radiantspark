@@ -1,4 +1,3 @@
-import { ContactLink } from './ContactLink';
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -45,7 +44,7 @@ export const UsaView: React.FC<UsaViewProps> = ({ onOpenSparkSync, onSwitchToInd
     },
     {
       q: 'Where can I reach Radiant Spark LLC?',
-      a: 'Use the contact section for the configured inquiry channel.'
+      a: 'You can email info@radiantsparkllc.com or visit the official corporate portal at radiantsparkllc.com.'
     }
   ];
 
@@ -124,7 +123,7 @@ export const UsaView: React.FC<UsaViewProps> = ({ onOpenSparkSync, onSwitchToInd
                   Spark IT Consulting · USA
                 </div>
                 <div className="absolute bottom-3 left-3 bg-slate-900/90 text-white font-bold text-xs px-3 py-1.5 rounded-xl border border-slate-700/80 backdrop-blur-sm shadow-lg">
-                  Radiant Spark LLC · USA
+                  Radiant Spark LLC · Sheridan, WY
                 </div>
               </div>
             </div>
@@ -146,9 +145,9 @@ export const UsaView: React.FC<UsaViewProps> = ({ onOpenSparkSync, onSwitchToInd
             <p className="text-xs text-slate-400 mt-1">Incorporated and governed under U.S. corporate statutes.</p>
           </div>
           <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-            <span className="text-4xl font-black text-indigo-400 font-mono block">USA</span>
-            <span className="text-sm font-bold text-slate-200 mt-1 block">Registration status</span>
-            <p className="text-xs text-slate-400 mt-1">Registration details have not been verified by this website.</p>
+            <span className="text-4xl font-black text-indigo-400 font-mono block">2025</span>
+            <span className="text-sm font-bold text-slate-200 mt-1 block">LLC Established</span>
+            <p className="text-xs text-slate-400 mt-1">Founded September 1, 2025 with enterprise technology focus.</p>
           </div>
         </div>
       </section>
@@ -252,7 +251,12 @@ export const UsaView: React.FC<UsaViewProps> = ({ onOpenSparkSync, onSwitchToInd
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-            <ContactLink />
+            <a
+              href="mailto:info@radiantsparkllc.com?subject=Spark%20IT%20Consulting%20Inquiry"
+              className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm transition-colors shadow"
+            >
+              Email info@radiantsparkllc.com ↗
+            </a>
             <a
               href="https://radiantsparkllc.com/"
               target="_blank"
