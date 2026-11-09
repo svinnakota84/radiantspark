@@ -5,9 +5,45 @@
     scroll-behavior: smooth;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   }
+  
+  html.light {
+    color-scheme: light;
+  }
+  
+  html.dark {
+    color-scheme: dark;
+  }
 }
 
-/* Glassmorphism & custom utility accents */
+/* Light mode override utilities */
+.light-mode {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+.light-mode .glass-panel {
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  color: #0f172a !important;
+}
+
+.light-mode .glass-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(203, 213, 225, 0.8) !important;
+  color: #0f172a !important;
+}
+
+.light-mode .glass-card:hover {
+  border-color: rgba(37, 99, 235, 0.5) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+/* Glassmorphism & custom utility accents for dark mode */
 .glass-panel {
   background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(16px);
@@ -75,4 +111,3 @@
 .animate-ticker:hover {
   animation-play-state: paused;
 }
-
