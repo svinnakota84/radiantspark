@@ -245,17 +245,17 @@ export default function App() {
         <button
           onClick={() => setIsDownloadAppOpen(true)}
           className="group px-4 py-2.5 rounded-full bg-[#1b1409]/90 hover:bg-[#251b0b] text-[#f59e0b] border border-[#f59e0b]/50 font-bold text-xs shadow-xl flex items-center gap-2 hover:scale-105 active:scale-95 transition-all backdrop-blur-md"
-          title="Download dedicated mobile app without corporate web pages"
+          title="Mobile website access information"
         >
           <span>📲</span>
-          <span>Download App (PWA &amp; APK)</span>
+          <span>Mobile website</span>
         </button>
 
         {/* Floating SparkSync App Launcher (image_ff37cf94.png) */}
         <button
           onClick={() => setIsSparkSyncOpen(true)}
           className="group px-4 py-2.5 rounded-full bg-[#0e1e3e]/90 hover:bg-[#132854] text-[#93c5fd] border border-[#3b82f6]/40 font-bold text-xs shadow-xl shadow-blue-500/20 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all backdrop-blur-md"
-          title="Launch SparkSync automated pipeline controller"
+          title="Open the local operations planner"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>

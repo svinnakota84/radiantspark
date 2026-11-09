@@ -76,7 +76,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
               className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/30 hover:from-emerald-500/30 hover:to-teal-500/40 border border-emerald-400/50 text-emerald-300 font-bold text-xs sm:text-sm backdrop-blur-md shadow-lg shadow-emerald-500/10 flex items-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <span>📲</span>
-              <span>Download Mobile Apps</span>
+              <span>Mobile website</span>
             </button>
 
             <button
@@ -301,7 +301,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
                 <span>MOBILE ECOSYSTEM · ZERO CORPORATE BLOAT</span>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
-                Standalone Mobile Web Apps &amp; PWA Downloads
+                Mobile website access
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Direct mobile-optimized interfaces for your iPhone, iPad, Android, or Desktop. Open the responsive website; native app packages are not published.
@@ -338,7 +338,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
                   </span>
                   <span className="text-xl">⚡</span>
                 </div>
-                <h3 className="text-lg font-bold text-white">SparkSync Mobile OS</h3>
+                <h3 className="text-lg font-bold text-white">SparkSync operations planner</h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   Business task planning for ten roles. No health telemetry, trading, betting or device-cleaning service is connected.
                 </p>
@@ -365,7 +365,7 @@ export const GlobalView: React.FC<GlobalViewProps> = ({
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-mono font-bold text-amber-300 bg-amber-950/70 border border-amber-500/30 px-2.5 py-0.5 rounded-full">
-                    Price Drop Aggregator
+                    Product finder
                   </span>
                   <span className="text-xl">🔥</span>
                 </div>
